@@ -1,0 +1,188 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "itcopilot"
+version = "0.1.0"
+description = "Production-grade AI-powered Income Tax Copilot for India"
+readme = "README.md"
+license = { text = "Apache-2.0" }
+requires-python = ">=3.12"
+authors = [
+    { name = "ITcopilot Contributors" },
+]
+keywords = ["income-tax", "india", "fastapi", "tax-filing", "ai"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Framework :: FastAPI",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Office/Business :: Financial :: Accounting",
+    "Typing :: Typed",
+]
+dependencies = [
+    "fastapi>=0.115.0",
+    "uvicorn[standard]>=0.32.0",
+    "pydantic>=2.10.0",
+    "pydantic-settings>=2.6.0",
+    "sqlalchemy[asyncio]>=2.0.36",
+    "alembic>=1.14.0",
+    "aiosqlite>=0.20.0",
+    "asyncpg>=0.30.0",
+    "polars>=1.17.0",
+    "pdfplumber>=0.11.0",
+    "openpyxl>=3.1.0",
+    "pyarrow>=18.0.0",
+    "httpx>=0.28.0",
+    "loguru>=0.7.0",
+    "python-multipart>=0.0.18",
+    "PyJWT>=2.10.0",
+    "bcrypt>=4.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.3.0",
+    "pytest-cov>=6.0.0",
+    "pytest-asyncio>=0.24.0",
+    "ruff>=0.8.0",
+    "black>=24.10.0",
+    "mypy>=1.13.0",
+    "bandit>=1.8.0",
+    "pip-audit>=2.7.0",
+    "pre-commit>=4.0.0",
+    "httpx>=0.28.0",
+    "types-openpyxl>=3.1.0",
+]
+docs = [
+    "mkdocs>=1.6.0",
+    "mkdocs-material>=9.6.0",
+    "mkdocstrings[python]>=0.27.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/nbhushan108/ITcopilot"
+Documentation = "https://nbhushan108.github.io/ITcopilot"
+Repository = "https://github.com/nbhushan108/ITcopilot"
+Issues = "https://github.com/nbhushan108/ITcopilot/issues"
+
+[tool.hatch.build.targets.wheel]
+packages = [
+    "apps/api/app",
+    "packages/common",
+    "packages/parsers",
+    "packages/tax_engine",
+    "packages/broker_imports",
+    "packages/excel_engine",
+    "packages/reporting",
+]
+
+[tool.hatch.build.targets.wheel.sources]
+"apps/api/app" = "app"
+"packages/common" = "common"
+"packages/parsers" = "parsers"
+"packages/tax_engine" = "tax_engine"
+"packages/broker_imports" = "broker_imports"
+"packages/excel_engine" = "excel_engine"
+"packages/reporting" = "reporting"
+
+[tool.pytest.ini_options]
+minversion = "8.0"
+pythonpath = ["apps/api", "packages"]
+testpaths = ["apps/api/tests", "tests", "packages"]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+addopts = [
+    "--strict-markers",
+    "--strict-config",
+    "-ra",
+    "--cov=app",
+    "--cov=packages",
+    "--cov-report=term-missing",
+    "--cov-report=xml",
+    "--cov-fail-under=95",
+]
+markers = [
+    "unit: Unit tests",
+    "integration: Integration tests",
+    "slow: Slow running tests",
+]
+
+[tool.coverage.run]
+source = ["app", "packages"]
+branch = true
+omit = [
+    "*/tests/*",
+    "*/__init__.py",
+]
+
+[tool.coverage.report]
+fail_under = 95
+exclude_lines = [
+    "pragma: no cover",
+    "if TYPE_CHECKING:",
+    "raise NotImplementedError",
+]
+
+[tool.black]
+line-length = 100
+target-version = ["py312"]
+include = '\.pyi?$'
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+src = ["apps", "packages", "scripts", "tests"]
+
+[tool.ruff.lint]
+select = [
+    "E", "W", "F", "I", "B", "C4", "UP", "ARG", "SIM",
+    "TCH", "PTH", "RUF", "S", "N", "D",
+]
+ignore = [
+    "D100", "D104", "D107",
+    "S101",
+]
+
+[tool.ruff.lint.per-file-ignores]
+"apps/api/tests/**/*.py" = ["S101", "S105", "S106", "D", "SIM117"]
+"tests/**/*.py" = ["S101", "D", "S105", "S106", "SIM117"]
+"**/tests/**/*.py" = ["S101", "D"]
+"apps/api/app/routers/**/*.py" = ["B008"]
+"apps/api/app/core/settings.py" = ["S104", "S105"]
+"scripts/**/*.py" = ["S603", "S104"]
+"apps/api/app/routers/auth.py" = ["S105", "S106"]
+"apps/api/app/schemas/auth.py" = ["S105"]
+"tests/test_settings.py" = ["S106"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["app", "common", "parsers", "tax_engine", "broker_imports", "excel_engine", "reporting"]
+force-single-line = false
+lines-after-imports = 2
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+plugins = ["pydantic.mypy"]
+
+[[tool.mypy.overrides]]
+module = [
+    "pdfplumber.*",
+    "jwt.*",
+    "openpyxl.*",
+]
+ignore_missing_imports = true
+
+[tool.bandit]
+exclude_dirs = ["tests", "apps/api/tests"]
+skips = ["B101", "B104", "B105"]

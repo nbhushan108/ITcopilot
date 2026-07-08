@@ -1,0 +1,99 @@
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: development
+    container_name: itcopilot-api
+    ports:
+      - "${API_PORT:-8000}:8000"
+    volumes:
+      - ./apps/api/app:/app/apps/api/app
+      - ./packages:/app/packages
+      - ./data:/app/data
+      - ./logs:/app/logs
+      - ./uploads:/app/uploads
+    env_file:
+      - .env
+    environment:
+      - ENVIRONMENT=development
+      - DATABASE_URL=postgresql+asyncpg://itcopilot:itcopilot@db:5432/itcopilot
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - itcopilot-network
+    restart: unless-stopped
+
+  db:
+    image: postgres:16-alpine
+    container_name: itcopilot-db
+    ports:
+      - "${DB_PORT:-5432}:5432"
+    environment:
+      POSTGRES_USER: itcopilot
+      POSTGRES_PASSWORD: itcopilot
+      POSTGRES_DB: itcopilot
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./docker/postgres/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U itcopilot -d itcopilot"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - itcopilot-network
+    restart: unless-stopped
+
+  web:
+    build:
+      context: ./apps/web
+      dockerfile: Dockerfile
+      target: development
+    container_name: itcopilot-web
+    ports:
+      - "${WEB_PORT:-5173}:5173"
+    volumes:
+      - ./apps/web/src:/app/src
+      - ./apps/web/public:/app/public
+    environment:
+      - VITE_API_BASE_URL=http://localhost:8000
+    depends_on:
+      - api
+    networks:
+      - itcopilot-network
+    restart: unless-stopped
+
+  api-prod:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: production
+    container_name: itcopilot-api-prod
+    profiles:
+      - production
+    ports:
+      - "8000:8000"
+    environment:
+      - ENVIRONMENT=production
+      - DEBUG=false
+      - DATABASE_URL=postgresql+asyncpg://itcopilot:itcopilot@db:5432/itcopilot
+      - AUTO_CREATE_SCHEMA=false
+      - AUTH_ENABLED=true
+      # Required: set before `docker compose --profile production up`
+      - SECRET_KEY=${SECRET_KEY:?Set SECRET_KEY to a 32+ char secret}
+      - AUTH_ADMIN_PASSWORD_HASH=${AUTH_ADMIN_PASSWORD_HASH:?Set AUTH_ADMIN_PASSWORD_HASH to a bcrypt hash}
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - itcopilot-network
+    restart: always
+
+volumes:
+  postgres_data:
+
+networks:
+  itcopilot-network:
+    driver: bridge
