@@ -5,7 +5,6 @@ from parsers.csv_parser import CSVParser
 from parsers.pdf_parser import PDFParser
 from parsers.registry import ParserRegistry, get_parser_registry
 
-
 __all__ = [
     "BaseParser",
     "CSVParser",

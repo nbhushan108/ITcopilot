@@ -2,6 +2,8 @@
 
 from typing import Any
 
+from common.config.exceptions import ConfigurationError
+
 
 class ITcopilotError(Exception):
     """Base exception for all ITcopilot application errors."""
@@ -11,10 +13,6 @@ class ITcopilotError(Exception):
         super().__init__(message)
         self.message = message
         self.details = details or {}
-
-
-class ConfigurationError(ITcopilotError):
-    """Raised when application configuration is invalid."""
 
 
 class DatabaseError(ITcopilotError):
@@ -43,3 +41,16 @@ class FileProcessingError(ITcopilotError):
 
 class TaxComputationError(ITcopilotError):
     """Raised when tax computation encounters an error."""
+
+
+__all__ = [
+    "AuthenticationError",
+    "AuthorizationError",
+    "ConfigurationError",
+    "DatabaseError",
+    "FileProcessingError",
+    "ITcopilotError",
+    "NotFoundError",
+    "TaxComputationError",
+    "ValidationError",
+]

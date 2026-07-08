@@ -24,12 +24,13 @@ graph TB
         BROKER[broker_imports]
         EXCEL[excel_engine]
         REPORT[reporting]
-        COMMON[common]
+        CONFIG[common/config]
     end
 
     subgraph Infrastructure
         DB[(SQLite / PostgreSQL)]
         LOG[Loguru Logging]
+        ENV[Environment Profiles]
         DOCKER[Docker]
     end
 
@@ -41,8 +42,10 @@ graph TB
     SERVICES --> TAX
     SERVICES --> BROKER
     SERVICES --> REPORT
-    TAX --> COMMON
-    PARSE --> COMMON
+    TAX --> CONFIG
+    PARSE --> CONFIG
+    FAST --> CONFIG
+    CONFIG --> ENV
     BROKER --> PARSE
     REPORT --> EXCEL
     REPORT --> TAX
@@ -63,7 +66,7 @@ graph TB
 
 | Package | Responsibility |
 |---------|---------------|
-| `common` | Shared types, constants, validators |
+| `common` | Shared types, constants, validators, **configuration engine** |
 | `tax_engine` | Income tax computation (old/new regime) |
 | `parsers` | PDF, CSV document parsing |
 | `broker_imports` | Broker statement import adapters |
@@ -73,8 +76,31 @@ graph TB
 ### Infrastructure
 
 - **Database**: SQLAlchemy 2 async with SQLite (dev) / PostgreSQL (prod)
-- **Logging**: Loguru with console and rotating file handlers
-- **Configuration**: pydantic-settings with environment-based profiles
+- **Logging**: Loguru with colored console, daily rotation, JSON file logs
+- **Configuration**: `packages/common/config/` — pydantic-settings profiles, tax config, feature flags, metadata
+
+See the [Configuration Guide](configuration-guide.md) for full details.
+
+## Configuration Engine (Module 2)
+
+```mermaid
+graph LR
+    ENV[.env profiles] --> SETTINGS[Settings Loader]
+    SETTINGS --> API[FastAPI App]
+    SETTINGS --> TAX_CFG[TaxYearConfiguration]
+    SETTINGS --> FLAGS[FeatureFlags]
+    SETTINGS --> META[ApplicationMetadata]
+    SETTINGS --> LOG[Loguru]
+```
+
+The configuration engine provides:
+
+- `DevelopmentSettings`, `TestingSettings`, `ProductionSettings`
+- Automatic environment detection via `ENVIRONMENT`
+- Singleton loader: `get_settings()`
+- Multi-year tax configuration registry
+- Runtime feature flags for all optional modules
+- Validated secrets, hosts, ports, and tax defaults
 
 ## Design Principles
 

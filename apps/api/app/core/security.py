@@ -10,9 +10,9 @@ from loguru import logger
 
 from app.core.exceptions import AuthenticationError
 from app.core.settings import Settings
+from common.config.constants import DEFAULT_JWT_ALGORITHM
 
-
-ALGORITHM = "HS256"
+ALGORITHM = DEFAULT_JWT_ALGORITHM
 
 
 def create_access_token(
@@ -38,7 +38,8 @@ def create_access_token(
         "exp": expire,
         "iat": datetime.now(tz=UTC),
     }
-    return str(jwt.encode(payload, settings.secret_key, algorithm=ALGORITHM))
+    secret = settings.jwt_secret or settings.secret_key
+    return str(jwt.encode(payload, secret, algorithm=settings.jwt_algorithm))
 
 
 def decode_access_token(token: str, settings: Settings) -> str:
@@ -55,7 +56,8 @@ def decode_access_token(token: str, settings: Settings) -> str:
         AuthenticationError: If token is invalid or expired.
     """
     try:
-        payload = jwt.decode(token, settings.secret_key, algorithms=[ALGORITHM])
+        secret = settings.jwt_secret or settings.secret_key
+        payload = jwt.decode(token, secret, algorithms=[settings.jwt_algorithm])
         subject = payload.get("sub")
         if not isinstance(subject, str) or not subject:
             raise AuthenticationError("Invalid token payload")

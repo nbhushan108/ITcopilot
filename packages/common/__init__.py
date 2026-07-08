@@ -3,7 +3,6 @@
 from common.constants import ASSESSMENT_YEARS, INDIAN_FINANCIAL_YEAR_PATTERN
 from common.types import PAN, Money
 
-
 __all__ = [
     "ASSESSMENT_YEARS",
     "INDIAN_FINANCIAL_YEAR_PATTERN",

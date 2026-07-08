@@ -3,7 +3,6 @@
 from excel_engine.reader import ExcelReader
 from excel_engine.writer import ExcelWriter, ReportSheet
 
-
 __all__ = [
     "ExcelReader",
     "ExcelWriter",

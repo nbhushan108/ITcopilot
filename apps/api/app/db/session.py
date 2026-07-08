@@ -15,7 +15,6 @@ from app.core.exceptions import DatabaseError
 from app.core.settings import Settings, get_settings
 from app.db.base import Base
 
-
 _engine: AsyncEngine | None = None
 _session_factory: async_sessionmaker[AsyncSession] | None = None
 _engine_url: str | None = None

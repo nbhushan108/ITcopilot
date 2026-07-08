@@ -6,7 +6,6 @@ from typing import Annotated
 
 from pydantic import AfterValidator, Field
 
-
 PAN_PATTERN = re.compile(r"^[A-Z]{5}[0-9]{4}[A-Z]$")
 
 

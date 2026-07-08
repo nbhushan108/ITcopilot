@@ -176,6 +176,8 @@ In production, set `AUTO_CREATE_SCHEMA=false` and apply migrations via Alembic b
 
 ## Environment Profiles
 
+See the [Configuration Guide](configuration-guide.md) for the full variable reference.
+
 | Variable | Development | Testing | Production |
 |----------|-------------|---------|------------|
 | `ENVIRONMENT` | development | testing | production |
@@ -183,6 +185,10 @@ In production, set `AUTO_CREATE_SCHEMA=false` and apply migrations via Alembic b
 | `DATABASE_URL` | sqlite | in-memory | postgresql |
 | `AUTO_CREATE_SCHEMA` | true | true | false |
 | `AUTH_ENABLED` | false | false | true (forced) |
+| `JWT_SECRET` | optional | optional | required (or `SECRET_KEY`) |
+| `LOG_JSON` | false | false | true |
+| `ENABLE_AI` | false | false | false |
+| `ENABLE_CACHE` | false | false | false |
 | `AUTH_ADMIN_PASSWORD` | secret (dev) | secret | not used |
 | `AUTH_ADMIN_PASSWORD_HASH` | — | — | required |
-| `LOG_LEVEL` | DEBUG | WARNING | INFO |
+| `LOG_LEVEL` | DEBUG | INFO | INFO |

@@ -42,6 +42,7 @@ plugins:
 nav:
   - Home: index.md
   - Architecture: architecture.md
+  - Configuration Guide: configuration-guide.md
   - Developer Guide: developer-guide.md
   - API Reference: api-reference.md
   - Roadmap: roadmap.md

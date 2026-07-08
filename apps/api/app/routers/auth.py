@@ -10,7 +10,6 @@ from app.core.security import create_access_token, verify_password
 from app.core.settings import Settings
 from app.schemas.auth import TokenRequest, TokenResponse
 
-
 router = APIRouter(prefix="/auth", tags=["Auth"])
 
 

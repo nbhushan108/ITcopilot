@@ -17,7 +17,7 @@ ITcopilot helps Indian taxpayers compute income tax liability, import broker sta
 - **Document Parsing** — PDF and CSV financial statement extraction
 - **Broker Import** — Zerodha tradebook import with extensible broker registry
 - **Report Generation** — ITR summary reports in Excel and plain text
-- **REST API** — FastAPI with Swagger/ReDoc, structured logging, and dependency injection
+- **Configuration Engine** — Environment profiles, tax config, feature flags, structured logging
 - **Web Dashboard** — React + TypeScript + Tailwind frontend
 - **Docker Ready** — Multi-stage builds for development and production
 
@@ -47,6 +47,7 @@ graph TB
     subgraph Infrastructure
         DB[(SQLite / PostgreSQL)]
         LOG[Loguru]
+        CFG[Config Engine]
     end
 
     WEB --> ROUTERS
@@ -60,6 +61,7 @@ graph TB
     REPORT --> EXCEL
     SERVICES --> DB
     ROUTERS --> LOG
+    ROUTERS --> CFG
 ```
 
 ## Technology Stack

@@ -6,7 +6,6 @@ from decimal import Decimal
 
 from pydantic import BaseModel, Field, field_validator
 
-
 PAN_PATTERN = re.compile(r"^[A-Z]{5}[0-9]{4}[A-Z]$")
 
 

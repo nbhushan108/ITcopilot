@@ -51,10 +51,16 @@ class TestDatabaseSession:
         """Engine creation failures should raise DatabaseError."""
         settings = Settings(
             environment=Environment.TESTING,
-            database_url="invalid://not-a-real-driver",
+            database_url="sqlite+aiosqlite:///:memory:",
             secret_key="test-secret-key-not-for-production-use-only-32chars",
         )
-        with pytest.raises(DatabaseError, match="Database engine initialization failed"):
+        with (
+            patch(
+                "app.db.session.create_async_engine",
+                side_effect=RuntimeError("driver unavailable"),
+            ),
+            pytest.raises(DatabaseError, match="Database engine initialization failed"),
+        ):
             create_engine(settings)
 
     def test_get_engine_singleton_and_reset(self) -> None:

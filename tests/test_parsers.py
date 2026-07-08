@@ -8,7 +8,6 @@ from parsers.csv_parser import CSVParser
 from parsers.pdf_parser import PDFParser
 from parsers.registry import get_parser_registry
 
-
 SAMPLE_DIR = Path(__file__).resolve().parent.parent / "sample_data"
 
 

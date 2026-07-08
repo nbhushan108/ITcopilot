@@ -9,7 +9,6 @@ from app.core.settings import Settings
 from app.schemas.common import HealthResponse, VersionResponse
 from app.services.health_service import HealthService
 
-
 router = APIRouter(tags=["Health"])
 
 

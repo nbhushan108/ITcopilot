@@ -11,7 +11,6 @@ from app.schemas.auth import CurrentUser
 from app.schemas.tax import TaxAssessmentResponse, TaxComputationRequest
 from app.services.tax_service import TaxService
 
-
 router = APIRouter(prefix="/tax", tags=["Tax"])
 
 

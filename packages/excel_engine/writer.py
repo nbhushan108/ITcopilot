@@ -48,7 +48,9 @@ class ExcelWriter:
 
         try:
             workbook = Workbook()
-            workbook.remove(workbook.active)
+            default_sheet = workbook.active
+            if default_sheet is not None:
+                workbook.remove(default_sheet)
 
             for sheet_def in sheets:
                 self._write_sheet(workbook, sheet_def)

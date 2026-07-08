@@ -152,6 +152,9 @@ ignore = [
 "**/tests/**/*.py" = ["S101", "D"]
 "apps/api/app/routers/**/*.py" = ["B008"]
 "apps/api/app/core/settings.py" = ["S104", "S105"]
+"packages/common/config/settings.py" = ["S104", "S105"]
+"packages/common/config/validators.py" = ["S104"]
+"tests/config/**/*.py" = ["S101", "D", "S104", "S105", "S106"]
 "scripts/**/*.py" = ["S603", "S104"]
 "apps/api/app/routers/auth.py" = ["S105", "S106"]
 "apps/api/app/schemas/auth.py" = ["S105"]
@@ -160,7 +163,7 @@ ignore = [
 [tool.ruff.lint.isort]
 known-first-party = ["app", "common", "parsers", "tax_engine", "broker_imports", "excel_engine", "reporting"]
 force-single-line = false
-lines-after-imports = 2
+lines-after-imports = -1
 
 [tool.ruff.lint.pydocstyle]
 convention = "google"

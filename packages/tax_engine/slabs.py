@@ -4,7 +4,6 @@ from decimal import Decimal
 
 from tax_engine.models import TaxSlabBreakdown
 
-
 TaxSlab = tuple[Decimal, Decimal | None, Decimal]
 
 OLD_REGIME_SLABS: tuple[TaxSlab, ...] = (

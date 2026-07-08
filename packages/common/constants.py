@@ -2,7 +2,6 @@
 
 import re
 
-
 INDIAN_FINANCIAL_YEAR_PATTERN = re.compile(r"^\d{4}-\d{2}$")
 
 ASSESSMENT_YEARS: tuple[str, ...] = (

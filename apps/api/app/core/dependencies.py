@@ -13,7 +13,6 @@ from app.core.settings import Settings, get_settings
 from app.db.session import get_db_session
 from app.schemas.auth import CurrentUser
 
-
 _bearer_scheme = HTTPBearer(auto_error=False)
 
 

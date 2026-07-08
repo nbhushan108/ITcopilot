@@ -10,7 +10,6 @@ from app.db.session import (
     reset_engine_cache,
 )
 
-
 __all__ = [
     "Base",
     "check_database_connectivity",
