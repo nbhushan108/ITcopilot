@@ -62,5 +62,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Comprehensive test suite with pytest and coverage
 - Sample data for broker imports and tax computation
 
-[Unreleased]: https://github.com/itcopilot/itcopilot/compare/v0.1.0...HEAD
-[0.1.0]: https://github.com/itcopilot/itcopilot/releases/tag/v0.1.0
+[Unreleased]: https://github.com/nbhushan108/ITcopilot/compare/v0.1.0...HEAD
+[0.1.0]: https://github.com/nbhushan108/ITcopilot/releases/tag/v0.1.0

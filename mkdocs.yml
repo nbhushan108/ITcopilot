@@ -1,8 +1,8 @@
 site_name: ITcopilot Documentation
 site_description: Production-grade AI-powered Income Tax Copilot for India
-site_url: https://itcopilot.github.io/itcopilot
-repo_url: https://github.com/itcopilot/itcopilot
-repo_name: itcopilot/itcopilot
+site_url: https://nbhushan108.github.io/ITcopilot
+repo_url: https://github.com/nbhushan108/ITcopilot
+repo_name: nbhushan108/ITcopilot
 
 theme:
   name: material

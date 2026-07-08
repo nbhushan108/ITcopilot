@@ -19,7 +19,7 @@ ITcopilot helps Indian taxpayers compute income tax liability, import broker sta
 
 ```bash
 # Clone and setup
-git clone https://github.com/itcopilot/itcopilot.git
+git clone https://github.com/nbhushan108/ITcopilot.git
 cd itcopilot
 python -m venv .venv
 source .venv/bin/activate  # Windows: .venv\Scripts\activate

@@ -63,10 +63,10 @@ docs = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/itcopilot/itcopilot"
-Documentation = "https://itcopilot.github.io/itcopilot"
-Repository = "https://github.com/itcopilot/itcopilot"
-Issues = "https://github.com/itcopilot/itcopilot/issues"
+Homepage = "https://github.com/nbhushan108/ITcopilot"
+Documentation = "https://nbhushan108.github.io/ITcopilot"
+Repository = "https://github.com/nbhushan108/ITcopilot"
+Issues = "https://github.com/nbhushan108/ITcopilot/issues"
 
 [tool.hatch.build.targets.wheel]
 packages = [

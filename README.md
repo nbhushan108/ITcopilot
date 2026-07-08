@@ -2,7 +2,7 @@
 
 **Production-grade, open-source AI-powered Income Tax Copilot for India**
 
-[![CI](https://github.com/itcopilot/itcopilot/actions/workflows/ci.yml/badge.svg)](https://github.com/itcopilot/itcopilot/actions/workflows/ci.yml)
+[![CI](https://github.com/nbhushan108/ITcopilot/actions/workflows/ci.yml/badge.svg)](https://github.com/nbhushan108/ITcopilot/actions/workflows/ci.yml)
 [![License: Apache 2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
 [![Python 3.12+](https://img.shields.io/badge/python-3.12+-blue.svg)](https://www.python.org/downloads/)
 [![Code style: Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
@@ -86,7 +86,7 @@ graph TB
 
 ```bash
 # Clone repository
-git clone https://github.com/itcopilot/itcopilot.git
+git clone https://github.com/nbhushan108/ITcopilot.git
 cd itcopilot
 
 # Create virtual environment

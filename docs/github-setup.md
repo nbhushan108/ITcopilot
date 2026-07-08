@@ -1,18 +1,21 @@
 # GitHub Repository Setup (RC1)
 
-Before publishing `v0.1.0-rc1`, complete these steps:
+Repository: **https://github.com/nbhushan108/ITcopilot**
 
-## 1. Create the GitHub repository
+## 1. Clone and develop
 
-1. Create a new public repository (suggested name: `itcopilot`).
-2. Update `pyproject.toml` `[project.urls]` if your org/name differs.
-3. Update `mkdocs.yml` `repo_url` and `site_url` for your GitHub Pages site.
+```bash
+git clone https://github.com/nbhushan108/ITcopilot.git
+cd ITcopilot
+python -m venv .venv
+pip install -e ".[dev]"
+pre-commit install
+pytest
+```
 
 ## 2. Security reporting
 
-Primary channel: **GitHub Security Advisories** (Repository → Security → Advisories → Report a vulnerability).
-
-Optional email contact can be added once a domain is verified.
+Primary channel: [GitHub Security Advisories](https://github.com/nbhushan108/ITcopilot/security/advisories/new).
 
 ## 3. Production deployment secrets
 
@@ -28,9 +31,10 @@ export AUTH_ADMIN_PASSWORD_HASH="..."
 docker compose --profile production up --build
 ```
 
-## 4. Tag RC1
+## 4. Release workflow
 
 ```bash
+# After CI is green on main
 git tag -a v0.1.0-rc1 -m "ITcopilot v0.1.0-rc1"
 git push origin v0.1.0-rc1
 ```

@@ -12,7 +12,7 @@
 ### 1. Clone and Install
 
 ```bash
-git clone https://github.com/itcopilot/itcopilot.git
+git clone https://github.com/nbhushan108/ITcopilot.git
 cd itcopilot
 
 python -m venv .venv

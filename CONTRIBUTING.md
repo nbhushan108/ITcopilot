@@ -5,7 +5,7 @@ Thank you for your interest in contributing! Please read the full [Contributing 
 ## Quick Start
 
 ```bash
-git clone https://github.com/itcopilot/itcopilot.git
+git clone https://github.com/nbhushan108/ITcopilot.git
 cd itcopilot
 python -m venv .venv && source .venv/bin/activate  # Windows: .venv\Scripts\activate
 pip install -e ".[dev]"
