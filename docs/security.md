@@ -33,8 +33,9 @@ We will acknowledge receipt within 48 hours and provide a detailed response with
 ### Dependencies
 
 - Dependabot enabled for automated dependency updates
-- Bandit security scanning in CI pipeline
-- CodeQL analysis for Python vulnerabilities
+- Bandit and `pip-audit` scanning in CI pipeline
+- CodeQL analysis for Python and JavaScript vulnerabilities
+- JWT via PyJWT (HS256 only; no ECDSA dependencies)
 
 ### Docker
 

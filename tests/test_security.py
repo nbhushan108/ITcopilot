@@ -2,10 +2,12 @@
 
 from datetime import timedelta
 
+import jwt
 import pytest
 
 from app.core.exceptions import AuthenticationError
 from app.core.security import (
+    ALGORITHM,
     create_access_token,
     decode_access_token,
     hash_password,
@@ -54,10 +56,6 @@ class TestSecurity:
 
     def test_decode_token_missing_subject(self, settings: Settings) -> None:
         """Tokens without a subject should be rejected."""
-        from jose import jwt
-
-        from app.core.security import ALGORITHM
-
         token = jwt.encode({"exp": 9999999999}, settings.secret_key, algorithm=ALGORITHM)
         with pytest.raises(AuthenticationError, match="Invalid token payload"):
             decode_access_token(token, settings)

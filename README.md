@@ -70,7 +70,7 @@ graph TB
 | Data | Polars, PyArrow, pdfplumber, OpenPyXL |
 | Frontend | React, TypeScript, Vite, Tailwind CSS, ESLint |
 | Database | SQLite (dev), PostgreSQL (prod) |
-| Auth | JWT (python-jose), bcrypt |
+| Auth | JWT (PyJWT HS256), bcrypt |
 | DevOps | Docker, Docker Compose, GitHub Actions, pre-commit |
 | Quality | pytest (95% coverage floor), ruff, mypy, bandit |
 

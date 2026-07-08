@@ -33,7 +33,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Production Docker compose requires `SECRET_KEY` and `AUTH_ADMIN_PASSWORD_HASH`
 
 ### Fixed
-- Ruff and MyPy errors across codebase
+- Replaced `python-jose` with `PyJWT` to remove transitive `ecdsa` vulnerability (PYSEC-2026-1325)
+- Added `pip-audit` to CI; upgraded pip to >=26.1.2 in CI and Docker builds
 - Missing FastAPI/Request imports in exception handlers
 - Frontend package-lock.json regeneration
 - Bandit CI failures (documented skips for container bind and dev auth)

@@ -4,7 +4,8 @@ from datetime import UTC, datetime, timedelta
 from typing import Any
 
 import bcrypt
-from jose import JWTError, jwt
+import jwt
+from jwt.exceptions import PyJWTError
 from loguru import logger
 
 from app.core.exceptions import AuthenticationError
@@ -59,7 +60,7 @@ def decode_access_token(token: str, settings: Settings) -> str:
         if not isinstance(subject, str) or not subject:
             raise AuthenticationError("Invalid token payload")
         return subject
-    except JWTError as exc:
+    except PyJWTError as exc:
         logger.warning("JWT validation failed: {}", exc)
         raise AuthenticationError("Invalid or expired token") from exc
 

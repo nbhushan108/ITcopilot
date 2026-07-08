@@ -29,7 +29,7 @@ COPY pyproject.toml README.md ./
 COPY apps/api/app ./apps/api/app
 COPY packages ./packages
 
-RUN pip install --upgrade pip && \
+RUN pip install --upgrade "pip>=26.1.2" && \
     pip install -e ".[dev]"
 
 RUN mkdir -p /app/data /app/logs /app/uploads
@@ -47,7 +47,7 @@ COPY pyproject.toml README.md ./
 COPY apps/api/app ./apps/api/app
 COPY packages ./packages
 
-RUN pip install --upgrade pip && \
+RUN pip install --upgrade "pip>=26.1.2" && \
     pip install -e .
 
 # =============================================================================

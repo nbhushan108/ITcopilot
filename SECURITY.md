@@ -17,6 +17,6 @@ See our full [Security Policy](docs/security.md) for details on supported versio
 ## Security Practices
 
 - No secrets in source code or Docker images
-- Bandit and CodeQL scanning in CI
+- Bandit and pip-audit scanning in CI
 - Input validation on all API endpoints
 - Production containers run as non-root user
